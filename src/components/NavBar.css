@@ -9,7 +9,7 @@ header {
   color: white;
   padding: 24px 40px;
   display: flex;
-  font-size: 20px;
+  font-size: 16px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -18,10 +18,8 @@ header {
   user-select: none;
 
   .left-bar {
-    display: flex;
-    gap: 40px;
-    align-items: center;
     width: 50%;
+    display: flex;
 
     .logo {
       display: flex;
@@ -31,9 +29,22 @@ header {
       cursor: pointer;
       align-items: center;
     }
+  }
+
+  .mid-bar {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    font-weight: 600;
 
     span {
       cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        transition: 0.5s;
+        color: #585d5f;
+      }
     }
   }
 
@@ -44,8 +55,8 @@ header {
     justify-content: end;
 
     input {
-      font-size: 20px;
-      padding: 12px 20px;
+      font-size: 16px;
+      padding: 14px 20px;
       background-color: #585d5f;
       color: white;
       border: none;
@@ -60,11 +71,17 @@ header {
 
     button {
       background-color: #585d5f;
-      padding: 12.5px;
+      padding: 12px;
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
       border: none;
       cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        transition: 0.5s;
+        background-color: #44494b;
+      }
     }
   }
 }
