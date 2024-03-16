@@ -1,6 +1,7 @@
 import React from "react";
 import "./NavBar.css";
 import { LogoIcon } from "../assets/svg/LogoIcon";
+import { SearchIcon } from "../assets/svg/SearchIcon";
 
 function NavBar() {
   return (
@@ -15,7 +16,12 @@ function NavBar() {
         <span>PAGE</span>
         <span>PAGE</span>
       </div>
-      <div className="right-bar"></div>
+      <div className="right-bar">
+        <input placeholder="PESQUISAR" />
+        <button>
+          <SearchIcon />
+        </button>
+      </div>
     </header>
   );
 }
