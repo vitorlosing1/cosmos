@@ -1,8 +1,16 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import NavBar from "./components/Header";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  return <NavBar />;
+  return (
+    <main>
+      <NavBar />
+      <Outlet />
+      <Footer />
+    </main>
+  );
 }
 
 export default App;
