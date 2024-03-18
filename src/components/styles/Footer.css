@@ -13,8 +13,14 @@ footer {
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding: 24px 40px;
+  padding: 24px 80px;
   gap: 40px;
+
+  a {
+    text-decoration: none;
+    color: white;
+    width: fit-content;
+  }
 
   .logo {
     display: flex;
@@ -23,6 +29,7 @@ footer {
     font-size: 24px;
     cursor: pointer;
     align-items: center;
+    width: fit-content;
   }
 
   hr {
@@ -46,8 +53,13 @@ footer {
       width: 50%;
 
       li {
+        width: fit-content;
         list-style: none;
         cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

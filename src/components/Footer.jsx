@@ -2,18 +2,23 @@ import React from "react";
 import "./styles/Footer.css";
 import { LogoIcon } from "../assets/svg/LogoIcon";
 import ReloadPage from "./ReloadPage";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
     <footer>
-      <div className="logo" onClick={ReloadPage}>
-        <LogoIcon />
-        COSMOS
-      </div>
+      <Link to={"/"}>
+        <div className="logo" onClick={ReloadPage}>
+          <LogoIcon />
+          COSMOS
+        </div>
+      </Link>
       <hr />
       <div className="sections">
         <ul>
-          <li onClick={ReloadPage}>HOME</li>
+          <Link to={"/"}>
+            <li onClick={ReloadPage}>HOME</li>
+          </Link>
           <li>PAGE</li>
         </ul>
         <ul>

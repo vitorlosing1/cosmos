@@ -3,15 +3,18 @@ import "./styles/Header.css";
 import { LogoIcon } from "../assets/svg/LogoIcon";
 import { SearchIcon } from "../assets/svg/SearchIcon";
 import ReloadPage from "./ReloadPage";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
     <header>
       <div className="left-bar">
-        <div className="logo" onClick={ReloadPage}>
-          <LogoIcon />
-          COSMOS
-        </div>
+        <Link to={"/"}>
+          <div className="logo" onClick={ReloadPage}>
+            <LogoIcon />
+            COSMOS
+          </div>
+        </Link>
       </div>
       <div className="mid-bar">
         <span>PAGE</span>

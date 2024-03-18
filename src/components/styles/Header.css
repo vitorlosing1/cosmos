@@ -1,6 +1,6 @@
 header {
   background-color: #1b2023;
-  padding: 24px 40px;
+  padding: 24px 80px;
   display: flex;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -8,6 +8,13 @@ header {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: white;
+    width: fit-content;
+  }
 
   .left-bar {
     width: 50%;
