@@ -11,9 +11,23 @@ function Footer() {
         COSMOS
       </div>
       <hr />
-      <div className="footer-links">
-        <li>HOME</li>
-        <li>PAGE</li>
+      <div className="sections">
+        <ul>
+          <li onClick={ReloadPage}>HOME</li>
+          <li>PAGE</li>
+        </ul>
+        <ul>
+          <li>PAGE</li>
+          <li>PAGE</li>
+        </ul>
+        <ul>
+          <li>PAGE</li>
+          <li>PAGE</li>
+        </ul>
+        <ul>
+          <li>PAGE</li>
+          <li>PAGE</li>
+        </ul>
       </div>
       <hr />
       <small>©COSMOS 2024</small>
