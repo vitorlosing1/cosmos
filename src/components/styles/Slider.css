@@ -1,0 +1,99 @@
+.slider-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slider {
+  display: flex;
+  background-color: black;
+}
+
+.slide {
+  flex: 0 0 100%;
+  image-orientation: initial;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+  position: absolute;
+  left: -9999px;
+}
+
+.slide.active {
+  position: initial;
+  height: 600px;
+
+  opacity: 1;
+}
+
+.slide-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.pagination-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin: 0 5px;
+}
+
+.circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid white;
+}
+
+.loading {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: loading-animation 4s infinite;
+}
+
+@keyframes loading-animation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pause-play-btn {
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.pause-play-btn:focus {
+  outline: none;
+}
