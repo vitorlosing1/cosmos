@@ -2,22 +2,26 @@
   position: relative;
   width: 100%;
   margin: 0 auto;
+  height: 600px;
+  overflow: hidden;
 }
 
 .slider {
   display: flex;
-  background-color: black;
+  background-color: #1b2023;
+  overflow: hidden;
 }
 
 .slide {
-  flex: 0 0 100%;
-  image-orientation: initial;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 0.5s linear;
-  position: absolute;
-  left: -9999px;
+  transition: opacity 0.5s ease, left 0.5s ease;
 }
 
 .slide.active {
@@ -30,10 +34,10 @@
 .slide-content {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 8.5%;
   transform: translate(-50%, -50%);
   color: white;
-  text-align: center;
+  text-align: start;
 }
 
 .pagination {

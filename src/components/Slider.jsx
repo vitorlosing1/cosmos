@@ -31,38 +31,43 @@ const Slider = () => {
   };
 
   return (
-    <div className="slider-container">
-      <div className="slider">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`slide ${index === currentIndex ? "active" : ""}`}
-            style={{ backgroundImage: `url(${image})` }}
-          >
-            <div className="slide-content">
-              <h2>Slide {index + 1}</h2>
-              <p>This is a sample text.</p>
-            </div>
-          </div>
-        ))}
-        <div className="pagination">
-          {images.map((_, index) => (
-            <button
+    <div>
+      <div className={"slider-container"}>
+        <div className="slider">
+          {images.map((image, index) => (
+            <div
               key={index}
-              className={`pagination-btn ${
-                index === currentIndex ? "active" : ""
-              }`}
-              onClick={() => handlePaginationClick(index)}
+              className={`slide ${index === currentIndex ? "active" : ""}`}
+              style={{
+                backgroundImage: `url(${image})`,
+              }}
             >
-              <div className="loading"></div>
-              <div className="circle"></div>
-            </button>
+              <div className="slide-content">
+                <h2>Slide {index + 1}</h2>
+                <p>This is a sample text.</p>
+              </div>
+            </div>
           ))}
-          <button className="pause-play-btn" onClick={handlePausePlay}>
-            {isPlaying ? <FaPause /> : <FaPlay />}
-          </button>
+          <div className="pagination">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                className={`pagination-btn ${
+                  index === currentIndex ? "active" : ""
+                }`}
+                onClick={() => handlePaginationClick(index)}
+              >
+                <div className="loading"></div>
+                <div className="circle"></div>
+              </button>
+            ))}
+            <button className="pause-play-btn" onClick={handlePausePlay}>
+              {isPlaying ? <FaPause /> : <FaPlay />}
+            </button>
+          </div>
         </div>
       </div>
+      galo frito
     </div>
   );
 };
