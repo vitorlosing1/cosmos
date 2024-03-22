@@ -3,12 +3,14 @@ import { FaPause, FaPlay } from "react-icons/fa";
 import "./styles/Slider.css";
 import slide1 from "../assets/images/slides/image1.jpg";
 import slide2 from "../assets/images/slides/image2.jpg";
+import slide3 from "../assets/images/slides/image3.jpg";
+import slide4 from "../assets/images/slides/image4.jpg";
 
 const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const images = [slide1, slide2, slide1, slide2];
+  const images = [slide1, slide2, slide3, slide4];
 
   const slidesContent = [
     {
