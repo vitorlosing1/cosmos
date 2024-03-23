@@ -1,0 +1,19 @@
+.principal {
+    background-color: aqua;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+p {
+    text-align: center;
+    margin: 15px 30px 15px 30px;
+}
+
+.foto {
+    display: table;
+    display: table-cell;
+    vertical-align: middle;
+    display: inline-block;
+}
