@@ -1,0 +1,37 @@
+.pictures-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 20px;
+
+  .picture-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 20px;
+
+    .picture-text {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      h1 {
+        width: 600px;
+        text-align: center;
+        font-size: 24px;
+      }
+
+      .description {
+        width: 600px;
+        text-align: center;
+      }
+    }
+
+    .picture {
+      width: auto;
+      height: 480px;
+      object-fit: cover;
+    }
+  }
+}

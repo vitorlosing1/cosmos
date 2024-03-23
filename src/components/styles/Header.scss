@@ -37,6 +37,7 @@ header {
     font-weight: 600;
 
     span {
+      text-wrap: nowrap;
       cursor: pointer;
       transition: 0.5s;
 

@@ -1,17 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./styles.css";
+import "./styles.scss";
 
 function Teste() {
   const [fotoDoDia, setFotoDoDia] = useState(null);
-  const url = 'https://api.nasa.gov/planetary/apod?api_key=ZS20fIadnlJGsUtPf7qDc1BzA3yy0whmACy1mdL1';
+  const url =
+    "https://api.nasa.gov/planetary/apod?api_key=ZS20fIadnlJGsUtPf7qDc1BzA3yy0whmACy1mdL1";
 
   const buscarFotoDoDia = async () => {
     try {
       const respostaAPI = await axios.get(url);
       setFotoDoDia(respostaAPI.data); // Ajuste aqui
     } catch (error) {
-      console.log('Não foi possível carregar os dados: ' + error);
+      console.log("Não foi possível carregar os dados: " + error);
     }
   };
 
@@ -21,16 +22,15 @@ function Teste() {
 
   if (!fotoDoDia) return <div />;
   return (
-    <main>
-      <div className="principal">
-        <h1>Titulo: {fotoDoDia.title}</h1>
-        <p>Descrição: {fotoDoDia.explanation}</p>
-        <div className="foto">
-          <img src={fotoDoDia.url} ></img>
+    <main className="pictures-container">
+      <div className="browse-day">galo</div>
+      <div className="picture-content">
+        <div className="picture-text">
+          <h1>{fotoDoDia.title}</h1>
+          <p className="description">{fotoDoDia.explanation}</p>
         </div>
-
+        <img className="picture" src={fotoDoDia.url}></img>
       </div>
-
     </main>
   );
 }

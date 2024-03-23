@@ -11,7 +11,7 @@ export const slidesContent = [
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     button: "VER MAIS",
     subtext: "*imagem meramente ilustrativa",
-    link: "/",
+    link: "/foto-do-dia",
   },
   {
     title: "SLIDE 2",

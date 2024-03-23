@@ -17,8 +17,8 @@ function NavBar() {
         </Link>
       </div>
       <div className="mid-bar">
-        <Link to={"/teste"}>
-          <span>TESTE</span>
+        <Link to={"/foto-do-dia"}>
+          <span>FOTO DO DIA</span>
         </Link>
         <span>PAGE</span>
         <span>PAGE</span>
