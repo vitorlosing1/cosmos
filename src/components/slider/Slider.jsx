@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPause, FaPlay } from "react-icons/fa";
-import "../styles/Slider.css";
+import "../styles/Slider.scss";
 import { images, slidesContent } from "./SlidesData";
 import { Link } from "react-router-dom";
 
@@ -29,53 +29,52 @@ const Slider = () => {
   };
 
   return (
-    <div>
-      <div className="slider-container">
-        <div className="slider">
+    <div className="slider-container">
+      <div className="slider">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`slide ${index === currentIndex ? "active" : ""}`}
+            style={{
+              backgroundImage: `url(${image})`,
+            }}
+          >
+            <div className="slide-content">
+              <h1 className="slider-title">{slidesContent[index].title}</h1>
+              <p>{slidesContent[index].text}</p>
+              <Link to={slidesContent[index].link}>
+                <button className="slider-button">
+                  {slidesContent[index].button}
+                </button>
+              </Link>
+              <small className="slider-subtext">
+                {slidesContent[index].subtext}
+              </small>
+            </div>
+          </div>
+        ))}
+        <div className="pagination">
           {images.map((image, index) => (
-            <div
+            <button
               key={index}
-              className={`slide ${index === currentIndex ? "active" : ""}`}
+              className={`pagination-btn ${
+                index === currentIndex ? "active" : ""
+              } ${isPlaying && index === currentIndex ? "playing" : ""}`}
               style={{
                 backgroundImage: `url(${image})`,
               }}
+              onClick={() => handlePaginationClick(index)}
             >
-              <div className="slide-content">
-                <h1 className="slider-title">{slidesContent[index].title}</h1>
-                <p>{slidesContent[index].text}</p>
-                <Link to={slidesContent[index].link}>
-                  <button className="slider-button">
-                    {slidesContent[index].button}
-                  </button>
-                </Link>
-                <small className="slider-subtext">
-                  {slidesContent[index].subtext}
-                </small>
-              </div>
-            </div>
-          ))}
-          <div className="pagination">
-            {images.map((image, index) => (
-              <button
-                key={index}
-                className={`pagination-btn ${
-                  index === currentIndex ? "active" : ""
-                } ${isPlaying && index === currentIndex ? "playing" : ""}`}
-                style={{
-                  backgroundImage: `url(${image})`,
-                }}
-                onClick={() => handlePaginationClick(index)}
-              >
-                <div className="circle"></div>
-              </button>
-            ))}
-            <button className="pause-play-btn" onClick={handlePausePlay}>
-              {isPlaying ? <FaPause /> : <FaPlay />}
+              <svg className="circle" viewBox="0 0 50 50">
+                <circle cx="25" cy="25" r="23" strokeWidth="4" fill="none" />
+              </svg>
             </button>
-          </div>
+          ))}
+          <button className="pause-play-btn" onClick={handlePausePlay}>
+            {isPlaying ? <FaPause /> : <FaPlay />}
+          </button>
         </div>
       </div>
-      galo frito
     </div>
   );
 };

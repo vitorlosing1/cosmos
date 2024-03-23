@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Header.css";
+import "./styles/Header.scss";
 import { LogoIcon } from "../assets/svg/LogoIcon";
 import { SearchIcon } from "../assets/svg/SearchIcon";
 import ReloadPage from "./ReloadPage";

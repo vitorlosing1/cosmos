@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Footer.css";
+import "./styles/Footer.scss";
 import { LogoIcon } from "../assets/svg/LogoIcon";
 import ReloadPage from "./ReloadPage";
 import { Link } from "react-router-dom";
