@@ -10,20 +10,15 @@ function Teste() {
   const buscarFotoDoDia = async () => {
     try {
       const respostaAPI = await axios.get(url);
-      setFotoDoDia(respostaAPI.data); // Ajuste aqui
+      setFotoDoDia(respostaAPI.data);
     } catch (error) {
       console.log("Não foi possível carregar os dados: " + error);
     }
   };
 
-  buscarFotoDoDia.setHeader(
-    "Cache-Control",
-    "s-maxage=86399, stale-while-revalidate"
-  );
-
   useEffect(() => {
-    buscarFotoDoDia(); // Remova os parênteses aqui
-  }, []); // Adicione uma matriz de dependências vazia para garantir que o useEffect seja executado apenas uma vez
+    buscarFotoDoDia();
+  }, []);
 
   if (!fotoDoDia) return <div />;
   return (
@@ -31,7 +26,7 @@ function Teste() {
       <div className="search-day">galo</div>
       <div className="picture-content">
         <div className="picture-text">
-          <h1>{fotoDoDia.title}</h1>
+          <h1>{fotoDoDia.title.setHeader}</h1>
           <p className="description">{fotoDoDia.explanation}</p>
         </div>
         <img className="picture" src={fotoDoDia.url}></img>
