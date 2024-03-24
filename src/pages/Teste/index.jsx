@@ -26,7 +26,7 @@ function Teste() {
       <div className="search-day">galo</div>
       <div className="picture-content">
         <div className="picture-text">
-          <h1>{fotoDoDia.title.setHeader}</h1>
+          <h1>{fotoDoDia.title}</h1>
           <p className="description">{fotoDoDia.explanation}</p>
         </div>
         <img className="picture" src={fotoDoDia.url}></img>
