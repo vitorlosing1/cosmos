@@ -3,34 +3,25 @@
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  padding: 20px;
+  padding: 40px;
 
   .picture-content {
     display: flex;
-    align-items: center;
-    gap: 40px;
-    padding: 20px;
+    gap: 80px;
 
     .picture-text {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      align-items: center;
+      width: 600px;
       h1 {
-        width: 600px;
-        text-align: center;
         font-size: 24px;
-      }
-
-      .description {
-        width: 600px;
-        text-align: center;
       }
     }
 
     .picture {
-      width: auto;
-      height: 480px;
+      width: 600px;
+      height: auto;
       object-fit: cover;
     }
   }

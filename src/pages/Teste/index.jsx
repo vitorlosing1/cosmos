@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import "./styles.scss";
 
 function Teste() {
+  const apiSecret = import.meta.env.VITE_API_KEY;
   const [fotoDoDia, setFotoDoDia] = useState(null);
-  const url =
-    "https://api.nasa.gov/planetary/apod?api_key=ZS20fIadnlJGsUtPf7qDc1BzA3yy0whmACy1mdL1";
+  const url = `https://api.nasa.gov/planetary/apod?api_key=${apiSecret}`;
 
   const buscarFotoDoDia = async () => {
     try {
@@ -16,6 +16,11 @@ function Teste() {
     }
   };
 
+  buscarFotoDoDia.setHeader(
+    "Cache-Control",
+    "s-maxage=86399, stale-while-revalidate"
+  );
+
   useEffect(() => {
     buscarFotoDoDia(); // Remova os parênteses aqui
   }, []); // Adicione uma matriz de dependências vazia para garantir que o useEffect seja executado apenas uma vez
@@ -23,7 +28,7 @@ function Teste() {
   if (!fotoDoDia) return <div />;
   return (
     <main className="pictures-container">
-      <div className="browse-day">galo</div>
+      <div className="search-day">galo</div>
       <div className="picture-content">
         <div className="picture-text">
           <h1>{fotoDoDia.title}</h1>
