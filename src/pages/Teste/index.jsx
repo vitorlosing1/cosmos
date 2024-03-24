@@ -8,8 +8,8 @@ import ptbr from "date-fns/locale/pt-BR";
 registerLocale("ptbr", ptbr);
 
 function Teste() {
-  const apiNasa = import.meta.env.VITE_NASA_KEY;
-  const apiGoogle = import.meta.env.VITE_GOOGLE_KEY;
+  const apiNasa = import.meta.env.VITE_API_NASA_KEY;
+  const apiGoogle = import.meta.env.VITE_API_GOOGLE_KEY;
   const [picDay, setPicDay] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
