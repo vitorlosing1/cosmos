@@ -106,13 +106,10 @@ function Teste() {
     setSelectedDate(date);
   };
 
-  const handleSearchClick = () => {
-    searchPicDay(selectedDate);
-  };
-
   useEffect(() => {
+    searchPicDay(selectedDate);
     searchLatestPics();
-  }, []);
+  }, [selectedDate]);
 
   if (!picDay) return <div />;
   return (
@@ -126,10 +123,12 @@ function Teste() {
           className="datepicker"
           calendarClassName="calendar"
           maxDate={new Date()}
+          minDate={
+            new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+          }
           locale={ptbr}
           customInput={<CustomDatePickerInput />}
         ></DatePicker>
-        <button onClick={handleSearchClick}>Buscar</button>
       </div>
       <div className="picture-content">
         <div className="picture-text">

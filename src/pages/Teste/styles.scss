@@ -10,12 +10,17 @@
 
     .custom-date-picker-input {
       border-bottom: solid 2px #060c0f;
+      cursor: pointer;
+      width: fit-content;
+      display: flex;
+      width: 160px;
       .date-picker-input {
         border: transparent;
         color: #060c0f;
         font-weight: 600;
-        width: 60%;
         text-align: center;
+        cursor: pointer;
+        width: 140px;
 
         &:focus {
           outline: none;

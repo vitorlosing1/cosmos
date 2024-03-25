@@ -1,10 +1,10 @@
-export const CustomDatePickerInput = ({ value, onClick, onChange }) => (
+export const CustomDatePickerInput = ({ value, onClick }) => (
   <div className="custom-date-picker-input">
     <input
       type="text"
       value={value}
       onClick={onClick}
-      onChange={onChange}
+      readOnly
       className="date-picker-input"
     />
     <svg
