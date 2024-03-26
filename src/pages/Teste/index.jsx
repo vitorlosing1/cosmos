@@ -142,7 +142,7 @@ function Teste() {
         <div className="pics">
           {previousPics.map((url, index) => {
             const currentDate = new Date();
-            currentDate.setDate(currentDate.getDate() - index - 1);
+            currentDate.setDate(currentDate.getDate() - index);
             const formattedDate = currentDate.toLocaleDateString("pt-BR");
 
             return (

@@ -9,11 +9,13 @@
     font-weight: 600;
 
     .custom-date-picker-input {
-      border-bottom: solid 2px #060c0f;
+      margin-left: 8px;
+      border: solid 2px #060c0f;
+      padding: 4px 8px;
+      border-radius: 16px;
       cursor: pointer;
-      width: fit-content;
       display: flex;
-      width: 160px;
+      align-items: center;
       .date-picker-input {
         border: transparent;
         color: #060c0f;

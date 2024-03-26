@@ -1,12 +1,5 @@
 export const CustomDatePickerInput = ({ value, onClick }) => (
   <div className="custom-date-picker-input">
-    <input
-      type="text"
-      value={value}
-      onClick={onClick}
-      readOnly
-      className="date-picker-input"
-    />
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="1em"
@@ -71,6 +64,31 @@ export const CustomDatePickerInput = ({ value, onClick }) => (
           fill="#080D0F"
           d="M15.01,15.71c-0.24,0-0.49,0-0.73,0c-0.41-0.01-0.71-0.32-0.7-0.73c0-0.39,0.31-0.7,0.71-0.7
       c0.48,0,0.96,0,1.45,0c0.4,0,0.7,0.31,0.7,0.7c0,0.41-0.3,0.72-0.71,0.72C15.49,15.71,15.25,15.71,15.01,15.71z"
+        />
+      </g>
+    </svg>
+    <input
+      type="text"
+      value={value}
+      onClick={onClick}
+      readOnly
+      className="date-picker-input"
+    />
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 20 20"
+      onClick={onClick}
+    >
+      <g>
+        <path
+          fill="#080D0F"
+          d="M0,5.4c0.1-0.3,0.3-0.6,0.5-0.8c0.5-0.4,1.2-0.4,1.7,0c0.1,0.1,0.2,0.2,0.3,0.3C5,7.3,7.4,9.7,9.9,12.2
+		c0.1,0.1,0.2,0.1,0.3,0c2.5-2.5,4.9-4.9,7.4-7.4c0.4-0.4,0.9-0.6,1.5-0.4c0.5,0.2,0.8,0.5,0.9,1c0,0,0,0.1,0,0.1c0,0.2,0,0.3,0,0.5
+		c-0.1,0.5-0.5,0.8-0.8,1.2c-2.7,2.7-5.4,5.4-8.1,8.1c-0.4,0.4-0.9,0.6-1.6,0.4c-0.2-0.1-0.4-0.2-0.6-0.4c-2.8-2.8-5.7-5.7-8.5-8.5
+		C0.2,6.5,0.1,6.3,0,6C0,5.8,0,5.6,0,5.4z"
         />
       </g>
     </svg>
