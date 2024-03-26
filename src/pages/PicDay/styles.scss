@@ -7,6 +7,8 @@
 
   .search-day {
     font-weight: 600;
+    display: flex;
+    align-items: center;
 
     .custom-date-picker-input {
       margin-left: 8px;
@@ -16,7 +18,14 @@
       cursor: pointer;
       display: flex;
       align-items: center;
+      transition: 0.5s;
+
+      &:hover {
+        background-color: #cfcfcf;
+        transition: 0.5s;
+      }
       .date-picker-input {
+        background-color: transparent;
         border: transparent;
         color: #060c0f;
         font-weight: 600;
@@ -68,10 +77,12 @@
 
       .react-datepicker__navigation-icon:before {
         border-color: #1b2023;
+        transition-duration: 0.5s;
       }
 
       .react-datepicker__navigation:hover *:before {
         border-color: #cfcfcf;
+        transition: 0.5s;
       }
 
       .react-datepicker__navigation-icon {
@@ -90,19 +101,31 @@
         margin: 4px;
       }
       .react-datepicker__day {
+        border-radius: 50%;
         margin: 4px;
+        transition: 0.5s;
       }
 
       .react-datepicker__day--selected {
         border-radius: 50%;
         background-color: #1b2023;
         color: #ffffff;
+        transition: 0.5s;
+      }
+
+      .react-datepicker__day--keyboard-selected {
+        border-color: transparent;
+        background-color: transparent;
+        color: #1b2023;
+        border-radius: 50%;
+        transition: 0.5s;
       }
 
       .react-datepicker__day:hover {
         border-radius: 50%;
         background-color: #cfcfcf;
         color: #1b2023;
+        transition: 0.5s;
       }
 
       .react-datepicker__day--disabled {
@@ -145,20 +168,24 @@
     gap: 20px;
     text-align: center;
 
-    h4 {
-      color: #1b2023;
-    }
-
     .pics {
       display: flex;
       flex-wrap: wrap;
       width: 1292px;
       justify-content: space-between;
-      .previous-pic {
-        padding: 4px;
-        width: 256px;
-        object-fit: cover;
-        height: 200px;
+
+      .date {
+        margin-bottom: 36px;
+        h4 {
+          color: #1b2023;
+        }
+
+        .previous-pic {
+          padding: 4px;
+          width: 256px;
+          object-fit: cover;
+          height: 200px;
+        }
       }
     }
   }

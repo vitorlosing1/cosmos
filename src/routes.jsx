@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home/index";
-import Teste from "./pages/Teste";
+import PicDay from "./pages/PicDay";
 
 const routes = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "foto-do-dia",
-        element: <Teste />,
+        element: <PicDay />,
       },
     ],
   },
