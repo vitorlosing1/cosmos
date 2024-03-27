@@ -5,6 +5,7 @@ import "./styles.scss";
 import ptbr from "date-fns/locale/pt-BR";
 import { CustomDatePickerInput } from "../../components/pic-day/CustomDatePickerInput";
 import { picDayNasaApi } from "../../api/picDayNasaApi";
+import { DarkIcon } from "../../assets/svg/DarkIcon";
 
 registerLocale("ptbr", ptbr);
 
@@ -18,15 +19,24 @@ function PicDay() {
     handleDateChange,
   } = picDayNasaApi();
 
-  useEffect(() => {
-    searchPicDay(selectedDate);
-    searchLatestPics();
-  }, [selectedDate]);
+  const [isLoadingPicDay, setIsLoadingPicDay] = useState(true);
+  const [isLoadingLatestPics, setIsLoadingLatestPics] = useState(true);
 
-  if (!picDay) return <div />;
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoadingPicDay(true);
+      setIsLoadingLatestPics(true);
+      await Promise.all([
+        searchPicDay(selectedDate).then(() => setIsLoadingPicDay(false)),
+        searchLatestPics().then(() => setIsLoadingLatestPics(false)),
+      ]);
+    };
+    fetchData();
+  }, [selectedDate]);
 
   return (
     <main className="pictures-container">
+      <h1>NASA Astronomy Picture of the Day (APOD)</h1>
       <div className="search-day">
         Selecione a data:
         <DatePicker
@@ -55,36 +65,50 @@ function PicDay() {
           }}
         />
       </div>
-      <div className="picture-content">
-        <div className="picture-text">
-          <h1>{picDay.title}</h1>
-          <p className="description">{picDay.explanation}</p>
-        </div>
-        <img className="picture" src={picDay.url} alt={picDay.title} />
-      </div>
-      <div className="previous-pics">
-        <h2>Últimas 20 fotos</h2>
-        <div className="pics">
-          {previousPics.map((data, index) => {
-            const currentDate = new Date(
-              new Date().setDate(new Date(data.date).getDate() + 1)
-            );
-            const formattedDate = currentDate.toLocaleDateString("pt-BR");
 
-            return (
-              <div className="date" key={index}>
-                <h4>{formattedDate}</h4>
-                <img
-                  key={index}
-                  className="previous-pic"
-                  src={data.url}
-                  alt={`Foto anterior ${index + 1}`}
-                />
-              </div>
-            );
-          })}
+      {isLoadingPicDay ? (
+        <div className="loading">
+          <DarkIcon />
         </div>
-      </div>
+      ) : (
+        <div className="picture-content">
+          <div className="picture-text">
+            <h1>{picDay.title}</h1>
+            <p className="description">{picDay.explanation}</p>
+          </div>
+          <img className="picture" src={picDay.url} alt={picDay.title} />
+        </div>
+      )}
+
+      {isLoadingLatestPics ? (
+        <div className="loading">
+          <DarkIcon />
+        </div>
+      ) : (
+        <div className="previous-pics">
+          <h2>Últimas 20 fotos</h2>
+          <div className="pics">
+            {previousPics.map((data, index) => {
+              const currentDate = new Date(
+                new Date().setDate(new Date(data.date).getDate() + 1)
+              );
+              const formattedDate = currentDate.toLocaleDateString("pt-BR");
+
+              return (
+                <div className="date" key={index}>
+                  <h4>{formattedDate}</h4>
+                  <img
+                    key={index}
+                    className="previous-pic"
+                    src={data.url}
+                    alt={`Foto anterior ${index + 1}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </main>
   );
 }

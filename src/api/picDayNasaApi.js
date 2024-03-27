@@ -48,6 +48,7 @@ export const picDayNasaApi = () => {
       if (error.response && error.response.status === 404) {
         const yesterday = new Date(date);
         yesterday.setDate(date.getDate() - 1);
+        setSelectedDate(yesterday);
         await searchPicDay(yesterday);
       } else {
         console.log("Não foi possível carregar os dados: " + error);
@@ -60,6 +61,7 @@ export const picDayNasaApi = () => {
       const today = new Date();
       const previousDates = [];
       for (let i = 0; i <= 20; i++) {
+        // Começando do dia anterior
         const previousDate = new Date(today);
         previousDate.setDate(today.getDate() - i);
         previousDates.push(previousDate);
