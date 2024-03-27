@@ -90,7 +90,7 @@ export const picDayNasaApi = () => {
             if (error.response && error.response.status === 404) {
               const yesterday = new Date(date);
               yesterday.setDate(date.getDate() - 1);
-              const formattedDate = date.toISOString().split("T")[0];
+              const formattedDate = yesterday.toISOString().split("T")[0];
               const url = `https://api.nasa.gov/planetary/apod?api_key=${apiNasa}&date=${formattedDate}`;
               const response = await axios.get(url);
               const picData = { url: response.data.url, date: formattedDate };

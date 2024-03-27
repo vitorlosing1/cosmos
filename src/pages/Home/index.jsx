@@ -6,7 +6,7 @@ function Home() {
   return (
     <main className="home">
       <Slider />
-      gasfgase
+      <div className="content-container">teste</div>
     </main>
   );
 }

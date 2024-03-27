@@ -1,4 +1,9 @@
 .home {
   display: flex;
   flex-direction: column;
+
+  .content-container {
+    display: flex;
+    padding: 40px 80px;
+  }
 }
