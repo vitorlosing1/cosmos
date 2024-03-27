@@ -3,7 +3,7 @@ import { useState } from "react";
 import { translateApi } from "./translateApi";
 
 export const picDayNasaApi = () => {
-  const apiNasa = import.meta.env.VITE_API_NASA_KEY;
+  const apiNasa = import.meta.env.VITE_API_NASA;
   const { translateText } = translateApi();
   const [picDay, setPicDay] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const translateApi = () => {
-  const apiGoogle = import.meta.env.VITE_API_GOOGLE_KEY;
+  const apiGoogle = import.meta.env.VITE_API_GOOGLE;
 
   const translateText = async (texto) => {
     try {
