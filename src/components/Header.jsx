@@ -26,7 +26,7 @@ function NavBar() {
       </div>
       <div className="right-bar">
         <input id="search" placeholder="PESQUISAR" />
-        <button>
+        <button title="Pesquisar">
           <SearchIcon />
         </button>
       </div>

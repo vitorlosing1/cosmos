@@ -16,9 +16,11 @@ function Footer() {
       <hr />
       <div className="sections">
         <ul>
-          <Link to={"/"}>
-            <li onClick={ReloadPage}>HOME</li>
-          </Link>
+          <li>
+            <Link onClick={ReloadPage} to={"/"}>
+              HOME
+            </Link>
+          </li>
           <li>PAGE</li>
         </ul>
         <ul>

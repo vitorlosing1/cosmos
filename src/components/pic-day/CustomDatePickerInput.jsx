@@ -70,6 +70,7 @@ export const CustomDatePickerInput = React.forwardRef(
         readOnly
         ref={ref}
         className="date-picker-input"
+        placeholder="DD/MM/YYYY"
       />
 
       <svg
