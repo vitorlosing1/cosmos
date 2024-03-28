@@ -25,10 +25,12 @@ function NavBar() {
         <span>PAGE</span>
       </div>
       <div className="right-bar">
-        <input id="search" placeholder="PESQUISAR" />
-        <button title="Pesquisar">
-          <SearchIcon />
-        </button>
+        <div className="search">
+          <input id="search" placeholder="PESQUISAR" />
+          <button title="Pesquisar">
+            <SearchIcon />
+          </button>
+        </div>
       </div>
     </header>
   );
