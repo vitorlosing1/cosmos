@@ -38,7 +38,7 @@ function PicDay() {
     <main className="pictures-container">
       <h1>NASA Astronomy Picture of the Day (APOD)</h1>
       <div className="search-day">
-        Selecione a data:
+        <p>Selecione a data:</p>
         <DatePicker
           selected={selectedDate}
           onChange={handleDateChange}

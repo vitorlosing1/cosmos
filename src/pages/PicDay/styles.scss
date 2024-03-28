@@ -40,9 +40,12 @@
   }
 
   .search-day {
-    font-weight: 600;
     display: flex;
     align-items: center;
+
+    p {
+      font-weight: 600;
+    }
 
     .custom-date-picker-input {
       margin-left: 8px;
@@ -138,6 +141,7 @@
         border-radius: 50%;
         margin: 4px;
         transition: 0.5s;
+        font-weight: 600;
       }
 
       .react-datepicker__day--selected {
@@ -231,6 +235,7 @@
 
 @media (max-width: 1420px) {
   .pictures-container {
+    padding: 40px 20px;
     .picture-content {
       flex-direction: column;
       align-items: center;
@@ -258,6 +263,22 @@
     .previous-pics {
       .pics {
         width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .pictures-container {
+    .search-day {
+      flex-direction: column;
+    }
+
+    .picture-content {
+      .picture {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
       }
     }
   }
