@@ -5,6 +5,10 @@
   gap: 40px;
   padding: 80px;
 
+  h1 {
+    text-align: center;
+  }
+
   .loading {
     display: flex;
     align-items: center;
@@ -189,6 +193,10 @@
       height: auto;
       object-fit: cover;
     }
+
+    .description-mobile {
+      display: none;
+    }
   }
 
   .previous-pics {
@@ -202,7 +210,7 @@
       display: flex;
       flex-wrap: wrap;
       width: 1292px;
-      justify-content: space-between;
+      justify-content: center;
 
       .date {
         margin-bottom: 36px;
@@ -226,12 +234,24 @@
     .picture-content {
       flex-direction: column;
       align-items: center;
+      gap: 20px;
       .picture-text {
         text-align: center;
         width: auto;
+
+        .description-desktop {
+          display: none;
+        }
       }
       .picture {
-        width: 800px;
+        width: 100%;
+        height: 600px;
+        object-fit: cover;
+      }
+
+      .description-mobile {
+        display: flex;
+        text-align: center;
       }
     }
 

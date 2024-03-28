@@ -74,9 +74,10 @@ function PicDay() {
         <div className="picture-content">
           <div className="picture-text">
             <h1>{picDay.title}</h1>
-            <p className="description">{picDay.explanation}</p>
+            <p className="description-desktop">{picDay.explanation}</p>
           </div>
           <img className="picture" src={picDay.url} alt={picDay.title} />
+          <p className="description-mobile">{picDay.explanation}</p>
         </div>
       )}
 

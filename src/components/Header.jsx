@@ -12,21 +12,25 @@ function NavBar() {
         <Link to={"/"}>
           <div className="logo" onClick={ReloadPage}>
             <LogoIcon />
-            COSMOS
+            <span>COSMOS</span>
           </div>
         </Link>
       </div>
       <div className="mid-bar">
-        <Link to={"/foto-do-dia"}>
-          <span>FOTO DO DIA</span>
-        </Link>
-        <span>PAGE</span>
-        <span>PAGE</span>
-        <span>PAGE</span>
+        <nav className="menu-desktop">
+          <Link to={"/foto-do-dia"}>
+            <span>FOTO DO DIA</span>
+          </Link>
+          <span>PAGE</span>
+          <span>PAGE</span>
+          <span>PAGE</span>
+        </nav>
+
+        <nav className="menu-mobile"></nav>
       </div>
       <div className="right-bar">
         <div className="search">
-          <input id="search" placeholder="PESQUISAR" />
+          <input autoComplete="off" id="search" placeholder="Pesquisar..." />
           <button title="Pesquisar">
             <SearchIcon />
           </button>

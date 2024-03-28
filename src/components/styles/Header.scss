@@ -30,19 +30,20 @@ header {
   }
 
   .mid-bar {
-    display: flex;
-    gap: 80px;
-    align-items: center;
-    font-weight: 600;
-
-    span {
-      text-wrap: nowrap;
-      cursor: pointer;
-      transition: 0.5s;
-
-      &:hover {
+    .menu-desktop {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      gap: 80px;
+      span {
+        text-wrap: nowrap;
+        cursor: pointer;
         transition: 0.5s;
-        color: #585d5f;
+
+        &:hover {
+          transition: 0.5s;
+          color: #585d5f;
+        }
       }
     }
   }
@@ -60,22 +61,27 @@ header {
       input {
         font-size: 16px;
         background-color: transparent;
-        padding: 0px 20px;
+        padding: 12px 20px;
         color: white;
         border: none;
         outline: none;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
-        width: 180px;
+        width: 140px;
+        transition: width 0.4s ease-in-out;
 
         &::placeholder {
           color: #cfcfcf;
+        }
+
+        &:focus {
+          width: 200px;
         }
       }
 
       button {
         background-color: transparent;
-        padding: 16px;
+        padding: 12px;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
         border: none;
@@ -101,17 +107,61 @@ header {
     }
 
     .mid-bar {
-      gap: 40px;
+      .menu-desktop {
+        gap: 40px;
+      }
     }
     .right-bar {
       .search {
         input {
-          width: 120px;
+          width: 112px;
           font-size: 12px;
+
+          &:focus {
+            width: 140px;
+          }
         }
 
         button {
           padding: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  header {
+    .left-bar {
+      .logo {
+        font-size: 20px;
+        gap: 4px;
+
+        span {
+          display: none;
+        }
+      }
+    }
+
+    .mid-bar {
+      .menu-desktop {
+        display: none;
+      }
+    }
+    .right-bar {
+      .search {
+        background-color: transparent;
+        input {
+          background-color: transparent;
+          display: none;
+        }
+
+        button {
+          background-color: transparent;
+
+          &:hover {
+            background-color: transparent;
+          }
         }
       }
     }

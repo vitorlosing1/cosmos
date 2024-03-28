@@ -46,10 +46,7 @@ export const picDayNasaApi = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        const yesterday = new Date(date);
-        yesterday.setDate(date.getDate() - 1);
-        setSelectedDate(yesterday);
-        await searchPicDay(yesterday);
+        setPicDay(null);
       } else {
         console.log("Não foi possível carregar os dados: " + error);
       }
@@ -90,17 +87,7 @@ export const picDayNasaApi = () => {
             }
           } catch (error) {
             if (error.response && error.response.status === 404) {
-              const yesterday = new Date(date);
-              yesterday.setDate(date.getDate() - 1);
-              const formattedDate = yesterday.toISOString().split("T")[0];
-              const url = `https://api.nasa.gov/planetary/apod?api_key=${apiNasa}&date=${formattedDate}`;
-              const response = await axios.get(url);
-              const picData = { url: response.data.url, date: formattedDate };
-              localStorage.setItem(
-                `cachedPreviousPic_${formattedDate}`,
-                JSON.stringify(picData)
-              );
-              return picData;
+              return null;
             } else {
               throw error;
             }
