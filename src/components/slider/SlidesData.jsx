@@ -16,13 +16,13 @@ export const slidesContent = [
   {
     title: "SLIDE 2",
     text: "This is the content for slide 2.",
-    button: "GALO",
+    button: "SAIBA MAIS",
     link: "/",
   },
   {
     title: "SLIDE 3",
     text: "This is the content for slide 3.",
-    button: "PIPI",
+    button: "SAIBA MAIS",
     link: "/",
   },
   {
