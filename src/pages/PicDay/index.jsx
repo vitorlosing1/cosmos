@@ -26,13 +26,22 @@ function PicDay() {
     const fetchData = async () => {
       setIsLoadingPicDay(true);
       setIsLoadingLatestPics(true);
+      // Verifica se selectedDate é null e retorna o dia anterior
+      const dateToFetch =
+        selectedDate || new Date(new Date().setDate(new Date().getDate() - 1));
       await Promise.all([
-        searchPicDay(selectedDate).then(() => setIsLoadingPicDay(false)),
+        searchPicDay(dateToFetch).then(() => setIsLoadingPicDay(false)),
         searchLatestPics().then(() => setIsLoadingLatestPics(false)),
       ]);
     };
     fetchData();
   }, [selectedDate]);
+
+  const defaultDate =
+    selectedDate || new Date(new Date().setDate(new Date().getDate() - 1));
+  const previousPicsToShow = previousPics || [
+    new Date(new Date().setDate(new Date().getDate() - 1)),
+  ];
 
   return (
     <main className="pictures-container">
@@ -40,7 +49,7 @@ function PicDay() {
       <div className="search-day">
         <p>Selecione a data:</p>
         <DatePicker
-          selected={selectedDate}
+          selected={defaultDate}
           onChange={handleDateChange}
           dateFormat="dd/MM/yyyy"
           className="datepicker"
@@ -57,7 +66,7 @@ function PicDay() {
           customInput={<CustomDatePickerInput />}
           filterDate={(date) => {
             const isBeforeTwentyDays =
-              date < new Date().setDate(new Date().getDate() - 20);
+              date.getDate() < new Date().setDate(new Date().getDate() - 20);
             const formattedDate = date.toISOString().split("T")[0];
             return previousPics.some(
               (data) => data.date === formattedDate || isBeforeTwentyDays
@@ -73,11 +82,11 @@ function PicDay() {
       ) : (
         <div className="picture-content">
           <div className="picture-text">
-            <h1>{picDay.title}</h1>
-            <p className="description-desktop">{picDay.explanation}</p>
+            <h1>{picDay?.title}</h1>
+            <p className="description-desktop">{picDay?.explanation}</p>
           </div>
-          <img className="picture" src={picDay.url} alt={picDay.title} />
-          <p className="description-mobile">{picDay.explanation}</p>
+          <img className="picture" src={picDay?.url} alt={picDay?.title} />
+          <p className="description-mobile">{picDay?.explanation}</p>
         </div>
       )}
 
@@ -89,11 +98,10 @@ function PicDay() {
         <div className="previous-pics">
           <h2>Últimas 20 fotos</h2>
           <div className="pics">
-            {previousPics.map((data, index) => {
-              const currentDate = new Date(
-                new Date().setDate(new Date(data.date).getDate() + 1)
-              );
-              const formattedDate = currentDate.toLocaleDateString("pt-BR");
+            {previousPicsToShow.map((data, index) => {
+              const formattedDate = new Date(
+                new Date(data.date).setDate(new Date(data.date).getDate() + 1)
+              ).toLocaleDateString("pt-BR");
 
               return (
                 <div className="date" key={index}>

@@ -46,7 +46,7 @@ export const picDayNasaApi = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        setPicDay(null);
+        setSelectedDate(null);
       } else {
         console.log("Não foi possível carregar os dados: " + error);
       }
@@ -78,7 +78,6 @@ export const picDayNasaApi = () => {
               const picData = {
                 url: response.data.url,
                 date: formattedDate,
-                error: false,
               };
               localStorage.setItem(
                 `cachedPreviousPic_${formattedDate}`,
@@ -86,16 +85,19 @@ export const picDayNasaApi = () => {
               );
               return picData;
             } else {
-              return null;
-            }
-          } catch (error) {
-            if (error.response && error.response.status === 404) {
-              const picData = { url: null, date: formattedDate, error: true };
+              const picData = {
+                url: response.data.url,
+                date: formattedDate,
+              };
               localStorage.setItem(
                 `cachedPreviousPic_${formattedDate}`,
                 JSON.stringify(picData)
               );
               return picData;
+            }
+          } catch (error) {
+            if (error.response && error.response.status === 404) {
+              return null;
             } else {
               throw error;
             }
