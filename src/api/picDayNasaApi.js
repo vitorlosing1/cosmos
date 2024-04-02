@@ -85,15 +85,7 @@ export const picDayNasaApi = () => {
               );
               return picData;
             } else {
-              const picData = {
-                url: response.data.url,
-                date: formattedDate,
-              };
-              localStorage.setItem(
-                `cachedPreviousPic_${formattedDate}`,
-                JSON.stringify(picData)
-              );
-              return picData;
+              return null;
             }
           } catch (error) {
             if (error.response && error.response.status === 404) {
