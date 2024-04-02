@@ -58,6 +58,7 @@ export const picDayNasaApi = () => {
       const today = new Date();
       const previousDates = [];
       for (let i = 0; i <= 20; i++) {
+        // Começando do dia anterior
         const previousDate = new Date(today);
         previousDate.setDate(today.getDate() - i);
         previousDates.push(previousDate);
@@ -75,11 +76,7 @@ export const picDayNasaApi = () => {
           try {
             const response = await axios.get(url);
             if (response.data.media_type === "image") {
-              const picData = {
-                url: response.data.url,
-                date: formattedDate,
-                error: false,
-              };
+              const picData = { url: response.data.url, date: formattedDate };
               localStorage.setItem(
                 `cachedPreviousPic_${formattedDate}`,
                 JSON.stringify(picData)
@@ -90,12 +87,7 @@ export const picDayNasaApi = () => {
             }
           } catch (error) {
             if (error.response && error.response.status === 404) {
-              const picData = { url: null, date: formattedDate, error: true };
-              localStorage.setItem(
-                `cachedPreviousPic_${formattedDate}`,
-                JSON.stringify(picData)
-              );
-              return picData;
+              return null;
             } else {
               throw error;
             }
@@ -105,7 +97,7 @@ export const picDayNasaApi = () => {
 
       const previousPicsData = await Promise.all(previousPicsPromises);
       const filteredPreviousPics = previousPicsData.filter(
-        (data) => data !== null && data.media_type !== "video" && !data.error
+        (data) => data !== null && data.media_type !== "video"
       );
       setPreviousPics(filteredPreviousPics);
     } catch (error) {
