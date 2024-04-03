@@ -57,7 +57,7 @@ export const picDayNasaApi = () => {
     try {
       const today = new Date();
       const previousDates = [];
-      for (let i = 0; i <= 21; i++) {
+      for (let i = 0; i <= 20; i++) {
         const previousDate = new Date(today);
         previousDate.setDate(today.getDate() - i);
         previousDates.push(previousDate);
