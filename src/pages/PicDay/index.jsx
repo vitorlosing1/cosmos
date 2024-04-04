@@ -26,19 +26,15 @@ function PicDay() {
     const fetchData = async () => {
       setIsLoadingPicDay(true);
       setIsLoadingLatestPics(true);
-      // Verifica se selectedDate é null e retorna o dia anterior
-      const dateToFetch =
-        selectedDate || new Date(new Date().setDate(new Date().getDate() - 1));
+
       await Promise.all([
-        searchPicDay(dateToFetch).then(() => setIsLoadingPicDay(false)),
+        searchPicDay(selectedDate).then(() => setIsLoadingPicDay(false)),
         searchLatestPics().then(() => setIsLoadingLatestPics(false)),
       ]);
     };
     fetchData();
   }, [selectedDate]);
 
-  const defaultDate =
-    selectedDate || new Date(new Date().setDate(new Date().getDate() - 1));
   const previousPicsToShow = previousPics || [
     new Date(new Date().setDate(new Date().getDate() - 1)),
   ];
@@ -49,7 +45,7 @@ function PicDay() {
       <div className="search-day">
         <p>Selecione a data:</p>
         <DatePicker
-          selected={defaultDate}
+          selected={selectedDate}
           onChange={handleDateChange}
           dateFormat="dd/MM/yyyy"
           className="datepicker"
