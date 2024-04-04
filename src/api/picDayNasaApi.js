@@ -57,20 +57,20 @@ export const picDayNasaApi = () => {
     try {
       const today = new Date();
       const previousDates = [];
-      for (let i = 0; i <= 20; i++) {
+      let additionalDays = 20; // Número de dias adicionais se o dia atual retornar erro 404
+
+      let i = 0;
+      while (additionalDays > 0) {
         const previousDate = new Date(today);
         previousDate.setDate(today.getDate() - i);
         previousDates.push(previousDate);
-      }
 
-      const previousPicsPromises = previousDates.map(async (date) => {
-        const formattedDate = date.toISOString().split("T")[0];
+        const formattedDate = previousDate.toISOString().split("T")[0];
         const cachedPreviousPic = JSON.parse(
           localStorage.getItem(`cachedPreviousPic_${formattedDate}`)
         );
-        if (cachedPreviousPic) {
-          return cachedPreviousPic;
-        } else {
+
+        if (!cachedPreviousPic) {
           const url = `https://api.nasa.gov/planetary/apod?api_key=${apiNasa}&date=${formattedDate}`;
           try {
             const response = await axios.get(url);
@@ -83,18 +83,26 @@ export const picDayNasaApi = () => {
                 `cachedPreviousPic_${formattedDate}`,
                 JSON.stringify(picData)
               );
-              return picData;
             } else {
-              return null;
+              previousDates.pop(); // Remove a última data se a imagem não for do tipo "image"
+              additionalDays++; // Não conta este dia se a imagem não for do tipo "image"
             }
           } catch (error) {
             if (error.response && error.response.status === 404) {
-              return null;
-            } else {
-              throw error;
+              // Se o erro for 404, aumente additionalDays
+              additionalDays++;
             }
           }
         }
+        i++;
+        additionalDays--; // Reduz additionalDays para sair do loop quando necessário
+      }
+
+      const previousPicsPromises = previousDates.map(async (date) => {
+        const formattedDate = date.toISOString().split("T")[0];
+        return JSON.parse(
+          localStorage.getItem(`cachedPreviousPic_${formattedDate}`)
+        );
       });
 
       const previousPicsData = await Promise.all(previousPicsPromises);
