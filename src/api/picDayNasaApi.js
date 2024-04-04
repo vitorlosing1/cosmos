@@ -94,7 +94,6 @@ export const picDayNasaApi = () => {
               if (days > 0) {
                 days++;
               }
-              return null;
             } else {
               return null;
             }
