@@ -57,9 +57,7 @@ export const picDayNasaApi = () => {
     try {
       const today = new Date();
       const previousDates = [];
-      let days = 20;
-
-      for (let i = 0; i <= days; i++) {
+      for (let i = 0; i <= 20; i++) {
         const previousDate = new Date(today);
         previousDate.setDate(today.getDate() - i);
         previousDates.push(previousDate);
@@ -91,11 +89,9 @@ export const picDayNasaApi = () => {
             }
           } catch (error) {
             if (error.response && error.response.status === 404) {
-              if (days > 0) {
-                days++;
-              }
-            } else {
               return null;
+            } else {
+              throw error;
             }
           }
         }
