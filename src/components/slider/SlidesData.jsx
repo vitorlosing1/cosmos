@@ -8,9 +8,9 @@ export const images = [slide1, slide2, slide3, slide4];
 export const slidesContent = [
   {
     title: "FOTO DO DIA",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    button: "VER MAIS",
-    subtext: "*imagem meramente ilustrativa",
+    text: "O Astronomy Picture of the Day (APOD), ou Imagem Astronômica do Dia, é uma plataforma popular mantida pela NASA que oferece uma visão fascinante do cosmos todos os dias",
+    button: "VEJA MAIS FOTOS",
+    subtext: "foto do dia em 17/03/2024",
     link: "/foto-do-dia",
   },
   {

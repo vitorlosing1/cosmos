@@ -1,5 +1,7 @@
+@import "../../styles/variables.scss";
+
 header {
-  background-color: #1b2023;
+  background-color: $color-primary;
   padding: 24px 80px;
   display: flex;
   -webkit-touch-callout: none;
@@ -26,6 +28,14 @@ header {
       font-size: 24px;
       cursor: pointer;
       align-items: center;
+      fill: white;
+      transition: 0.5s;
+
+      &:hover {
+        color: $color-grey-light;
+        fill: $color-grey-light;
+        transition: 0.5s;
+      }
     }
   }
 
@@ -42,7 +52,7 @@ header {
 
         &:hover {
           transition: 0.5s;
-          color: #585d5f;
+          color: $color-grey-light;
         }
       }
     }
@@ -56,7 +66,7 @@ header {
 
     .search {
       border-radius: 28px;
-      background-color: #585d5f;
+      background-color: $color-grey-light;
       display: flex;
       input {
         font-size: 16px;
@@ -71,7 +81,7 @@ header {
         transition: width 0.4s ease-in-out;
 
         &::placeholder {
-          color: #cfcfcf;
+          color: $color-thirdly;
         }
 
         &:focus {
@@ -82,15 +92,15 @@ header {
       button {
         background-color: transparent;
         padding: 12px;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
+        border-top-right-radius: 24px;
+        border-bottom-right-radius: 24px;
         border: none;
         cursor: pointer;
         transition: 0.5s;
 
         &:hover {
           transition: 0.5s;
-          background-color: #44494b;
+          background-color: $color-secondary;
         }
       }
     }

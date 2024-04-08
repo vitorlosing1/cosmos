@@ -1,5 +1,7 @@
+@import "../../styles/variables.scss";
+
 footer {
-  background-color: #1b2023;
+  background-color: $color-primary;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -28,16 +30,25 @@ footer {
     font-size: 24px;
     cursor: pointer;
     align-items: center;
+    fill: white;
+    transition: 0.5s;
+
+    &:hover {
+      color: $color-grey-light;
+      fill: $color-grey-light;
+      transition: 0.5s;
+    }
   }
 
   hr {
-    background: #585d5f;
+    background: $color-secondary;
     border: none;
     height: 1px;
   }
 
   small {
     font-size: 12px;
+    color: $color-thirdly;
   }
 
   .sections {

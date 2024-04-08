@@ -106,7 +106,7 @@ function PicDay() {
                     key={index}
                     className="previous-pic"
                     src={data.url}
-                    alt={`Foto anterior ${index + 1}`}
+                    alt={data.title}
                   />
                 </div>
               );

@@ -75,9 +75,11 @@ export const picDayNasaApi = () => {
           try {
             const response = await axios.get(url);
             if (response.data.media_type === "image") {
+              const translatedTitle = await translateText(response.data.title);
               const picData = {
                 url: response.data.url,
                 date: formattedDate,
+                title: translatedTitle,
               };
               localStorage.setItem(
                 `cachedPreviousPic_${formattedDate}`,

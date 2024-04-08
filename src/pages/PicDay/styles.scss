@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .pictures-container {
   display: flex;
   flex-direction: column;
@@ -16,7 +18,7 @@
 
     .dark-icon {
       stroke-width: 0.8px;
-      stroke: #cfcfcf;
+      stroke: $color-thirdly;
       width: 100%;
       height: 100%;
       stroke-dashoffset: 200;
@@ -49,7 +51,7 @@
 
     .custom-date-picker-input {
       margin-left: 8px;
-      border: solid 2px #060c0f;
+      border: solid 2px $color-primary;
       padding: 4px 8px;
       border-radius: 16px;
       cursor: pointer;
@@ -58,13 +60,13 @@
       transition: 0.5s;
 
       &:hover {
-        background-color: #cfcfcf;
+        background-color: $color-thirdly;
         transition: 0.5s;
       }
       .date-picker-input {
         background-color: transparent;
         border: transparent;
-        color: #060c0f;
+        color: $color-text;
         font-weight: 600;
         text-align: center;
         cursor: pointer;
@@ -85,11 +87,11 @@
       position: relative;
 
       .react-datepicker__header {
-        background-color: #1b2023;
+        background-color: $color-primary;
         padding: 16px;
         font-size: 12px;
         border-radius: 24px;
-        border-bottom: 1px solid #cfcfcf;
+        border-bottom: 1px solid $color-thirdly;
       }
 
       .react-datepicker__current-month {
@@ -113,12 +115,12 @@
       }
 
       .react-datepicker__navigation-icon:before {
-        border-color: #1b2023;
+        border-color: $color-primary;
         transition-duration: 0.5s;
       }
 
       .react-datepicker__navigation:hover *:before {
-        border-color: #cfcfcf;
+        border-color: $color-thirdly;
         transition: 0.5s;
       }
 
@@ -146,34 +148,34 @@
 
       .react-datepicker__day--selected {
         border-radius: 50%;
-        background-color: #1b2023;
-        color: #ffffff;
+        background-color: $color-primary;
+        color: white;
         transition: 0.5s;
       }
 
       .react-datepicker__day--keyboard-selected {
         border-color: transparent;
         background-color: transparent;
-        color: #1b2023;
+        color: $color-primary;
         border-radius: 50%;
         transition: 0.5s;
       }
 
       .react-datepicker__day:hover {
         border-radius: 50%;
-        background-color: #cfcfcf;
-        color: #1b2023;
+        background-color: $color-thirdly;
+        color: $color-primary;
         transition: 0.5s;
       }
 
       .react-datepicker__day--disabled {
         cursor: default;
-        color: #cfcfcf;
+        color: $color-thirdly;
       }
 
       .react-datepicker__day--disabled:hover {
         background-color: transparent;
-        color: #cfcfcf;
+        color: $color-thirdly;
       }
     }
   }
@@ -219,7 +221,7 @@
       .date {
         margin-bottom: 36px;
         h4 {
-          color: #1b2023;
+          color: $color-primary;
         }
 
         .previous-pic {
