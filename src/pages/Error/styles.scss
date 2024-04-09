@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+
+  .return {
+    border: none;
+    background-color: $color-primary;
+    color: white;
+    font-size: 16px;
+    padding: 8px 24px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: $color-secondary;
+      transition: 0.5s;
+    }
+  }
+}

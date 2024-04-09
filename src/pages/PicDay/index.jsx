@@ -3,7 +3,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles.scss";
 import ptbr from "date-fns/locale/pt-BR";
-import { CustomDatePickerInput } from "../../components/pic-day/CustomDatePickerInput";
+import { CustomDatePickerInput } from "./CustomDatePickerInput";
 import { picDayNasaApi } from "../../api/picDayNasaApi";
 import { DarkIcon } from "../../assets/svg/DarkIcon";
 
@@ -26,14 +26,18 @@ function PicDay() {
     const fetchData = async () => {
       setIsLoadingPicDay(true);
       setIsLoadingLatestPics(true);
-
+      const dateToFetch =
+        selectedDate || new Date(new Date().setDate(new Date().getDate() - 1));
       await Promise.all([
-        searchPicDay(selectedDate).then(() => setIsLoadingPicDay(false)),
+        searchPicDay(dateToFetch).then(() => setIsLoadingPicDay(false)),
         searchLatestPics().then(() => setIsLoadingLatestPics(false)),
       ]);
     };
     fetchData();
   }, [selectedDate]);
+
+  const defaultDate =
+    selectedDate || new Date(new Date().setDate(new Date().getDate() - 1));
 
   const previousPicsToShow = previousPics || [
     new Date(new Date().setDate(new Date().getDate() - 1)),
@@ -45,7 +49,7 @@ function PicDay() {
       <div className="search-day">
         <p>Selecione a data:</p>
         <DatePicker
-          selected={selectedDate}
+          selected={defaultDate}
           onChange={handleDateChange}
           dateFormat="dd/MM/yyyy"
           className="datepicker"
@@ -61,11 +65,12 @@ function PicDay() {
           locale={ptbr}
           customInput={<CustomDatePickerInput />}
           filterDate={(date) => {
-            const isBeforeTwentyDays =
-              date.getDate() < new Date().setDate(new Date().getDate() - 20);
             const formattedDate = date.toISOString().split("T")[0];
+            const today = new Date();
+            const twentyDaysAgo = new Date();
+            twentyDaysAgo.setDate(today.getDate() - 20);
             return previousPics.some(
-              (data) => data.date === formattedDate || isBeforeTwentyDays
+              (data) => data.date === formattedDate || date <= twentyDaysAgo
             );
           }}
         />

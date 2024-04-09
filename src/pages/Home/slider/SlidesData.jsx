@@ -1,7 +1,7 @@
-import slide1 from "../../assets/images/slides/image1.jpg";
-import slide2 from "../../assets/images/slides/image2.jpg";
-import slide3 from "../../assets/images/slides/image3.jpg";
-import slide4 from "../../assets/images/slides/image4.jpg";
+import slide1 from "../../../assets/images/slides/image1.jpg";
+import slide2 from "../../../assets/images/slides/image2.jpg";
+import slide3 from "../../../assets/images/slides/image3.jpg";
+import slide4 from "../../../assets/images/slides/image4.jpg";
 
 export const images = [slide1, slide2, slide3, slide4];
 

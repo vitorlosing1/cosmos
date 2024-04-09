@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPause, FaPlay } from "react-icons/fa";
-import "../styles/Slider.scss";
+import "./Slider.scss";
 import { images, slidesContent } from "./SlidesData";
 import { Link } from "react-router-dom";
 

@@ -1,0 +1,55 @@
+@import "../../styles/variables.scss";
+
+.news-container {
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  .news-item {
+    display: flex;
+    gap: 20px;
+    .news-img {
+      width: 400px;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .news-content {
+      display: flex;
+      flex-direction: column;
+      width: 880px;
+      position: relative;
+      gap: 8px;
+
+      small {
+        position: absolute;
+        right: 0%;
+      }
+
+      .news-title {
+        width: 600px;
+      }
+
+      .read-article {
+        position: absolute;
+        bottom: 0;
+        border: none;
+        width: max-content;
+        display: flex;
+        justify-content: center;
+        background-color: $color-primary;
+        color: white;
+        padding: 8px 24px;
+        cursor: pointer;
+        border-radius: 16px;
+        margin-top: 20px;
+
+        &:hover {
+          background-color: $color-secondary;
+        }
+      }
+    }
+  }
+}
