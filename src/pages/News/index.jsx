@@ -13,7 +13,12 @@ function News() {
         const fetchedNews = await fetchAndSaveNews();
         const startIndex = (currentPage - 1) * newsPerPage;
         const endIndex = startIndex + newsPerPage;
-        setNews(fetchedNews.slice(startIndex, endIndex));
+        const newNews = fetchedNews.slice(startIndex, endIndex);
+        if (currentPage === 1) {
+          setNews(newNews);
+        } else {
+          setNews((prevNews) => [...prevNews, ...newNews]);
+        }
       } catch (error) {
         console.error("Erro ao buscar notícias:", error);
       }
@@ -22,12 +27,22 @@ function News() {
     fetchNews();
   }, [currentPage]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
+      nextPage();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const nextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
-  };
-
-  const prevPage = () => {
-    setCurrentPage((prevPage) => prevPage - 1);
   };
 
   const openArticle = (link) => {
@@ -56,13 +71,6 @@ function News() {
           <hr />
         </div>
       ))}
-      <div className="pagination">
-        <button onClick={prevPage} disabled={currentPage === 1}>
-          Anterior
-        </button>
-        <span>{currentPage}</span>
-        <button onClick={nextPage}>Próxima</button>
-      </div>
     </main>
   );
 }
