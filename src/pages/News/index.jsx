@@ -15,7 +15,7 @@ function News() {
         const endIndex = startIndex + newsPerPage;
         const newNews = fetchedNews.slice(startIndex, endIndex);
         if (currentPage === 1) {
-          setNews(newNews);
+          setNews(fetchedNews.slice(0, newsPerPage));
         } else {
           setNews((prevNews) => [...prevNews, ...newNews]);
         }

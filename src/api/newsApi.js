@@ -36,55 +36,62 @@ const fetchAndSaveNews = async () => {
     const snapshot = await get(child(newsRef, "/"));
     const firebaseNews = snapshot.val() || [];
 
-    // Retorna as notícias salvas no Firebase instantaneamente
-    // Se houver notícias no Firebase, retorna essas notícias
-    if (firebaseNews.length > 0) {
-      return firebaseNews;
-    }
-
-    // Se não houver notícias no Firebase, faz a requisição para obter as notícias mais recentes
+    // Faz a requisição para obter as notícias mais recentes
     const response = await axios.get(
       `https://api.spaceflightnewsapi.net/v4/articles/?limit=100`
     );
 
-    const translatedNews = await Promise.all(
-      response.data.results.map(async (article) => {
-        const translatedTitle = await translateApi().translateText(
-          article.title
-        );
-        const translatedContent = await translateApi().translateText(
-          article.summary
-        );
+    const apiNews = response.data.results;
 
-        // arruma os caracteres especiais
-        const decodedTitle = decode(translatedTitle);
-        const decodedContent = decode(translatedContent);
-        let truncatedContent = decodedContent.substring(0, 280); // Limita o conteúdo a 200 caracteres
-        if (decodedContent.length > 280) {
-          truncatedContent += "..."; // Adiciona "..." ao final se o conteúdo exceder 200 caracteres
-        }
-        const formattedDate = format(
-          new Date(article.published_at),
-          "dd/MM/yyyy 'às' HH:mm"
-        ); // Formata a data de publicação
-        return {
-          title: decodedTitle,
-          image: article.image_url,
-          content: truncatedContent,
-          publishedAt: formattedDate,
-          sourceName: article.news_site,
-          link: article.url,
-        };
-      })
-    );
+    // Verifica se há notícias com IDs diferentes das notícias já salvas
+    const newNews = apiNews.filter((apiArticle) => {
+      return !firebaseNews.some((firebaseArticle) => {
+        return firebaseArticle.link === apiArticle.url;
+      });
+    });
 
-    // Atualiza as notícias no Firebase apenas se houver notícias novas na request
-    if (translatedNews.length > 0) {
-      saveNewsToFirebase(translatedNews);
+    // Se houver notícias novas, atualiza as notícias no Firebase
+    if (newNews.length > 0) {
+      const translatedNews = await Promise.all(
+        newNews.map(async (article) => {
+          const translatedTitle = await translateApi().translateText(
+            article.title
+          );
+          const translatedContent = await translateApi().translateText(
+            article.summary
+          );
+
+          // arruma os caracteres especiais
+          const decodedTitle = decode(translatedTitle);
+          const decodedContent = decode(translatedContent);
+          let truncatedContent = decodedContent.substring(0, 280); // Limita o conteúdo a 200 caracteres
+          if (decodedContent.length > 280) {
+            truncatedContent += "..."; // Adiciona "..." ao final se o conteúdo exceder 200 caracteres
+          }
+          const formattedDate = format(
+            new Date(article.published_at),
+            "dd/MM/yyyy 'às' HH:mm"
+          ); // Formata a data de publicação
+          return {
+            title: decodedTitle,
+            image: article.image_url,
+            content: truncatedContent,
+            publishedAt: formattedDate,
+            sourceName: article.news_site,
+            link: article.url,
+          };
+        })
+      );
+
+      // Atualiza as notícias no Firebase apenas se houver notícias novas na request
+      if (translatedNews.length > 0) {
+        const mergedNews = [...translatedNews, ...firebaseNews];
+        saveNewsToFirebase(mergedNews);
+      }
     }
 
     // Retorna as notícias da request API
-    return translatedNews;
+    return firebaseNews;
   } catch (error) {
     console.error("Erro ao buscar e salvar notícias:", error);
     throw error; // Lança o erro para que seja tratado no componente Home
