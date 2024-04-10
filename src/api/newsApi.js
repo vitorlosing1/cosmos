@@ -1,7 +1,7 @@
 import axios from "axios";
 import { translateApi } from "./translateApi";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, get, child, push } from "firebase/database";
+import { getDatabase, ref, set, get, child } from "firebase/database";
 import { format } from "date-fns";
 import { decode } from "html-entities";
 
