@@ -20,6 +20,10 @@ function Home() {
     fetchData();
   }, []);
 
+  const openArticle = (link) => {
+    window.open(link, "_blank");
+  };
+
   return (
     <main className="home">
       <Slider />
@@ -29,14 +33,21 @@ function Home() {
           <div className="latest-news">
             {Array.isArray(news) &&
               news.map((item, index) => (
-                <div className="items" key={index}>
+                <div
+                  className="items"
+                  onClick={() => openArticle(item.link)}
+                  key={index}
+                >
                   <div className="news-item">
                     <img
                       className="news-img"
                       src={item.image}
                       alt={item.title}
                     />
-                    <small className="date">{item.publishedAt}</small>
+                    <div className="info">
+                      <small>{item.sourceName}</small>
+                      <small>{item.publishedAt}</small>
+                    </div>
                   </div>
                   <h4 className="news-title">{item.title}</h4>
                 </div>
