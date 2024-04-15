@@ -5,6 +5,7 @@ import Home from "./pages/Home/index";
 import PicDay from "./pages/PicDay";
 import ErrorPage from "./pages/Error";
 import News from "./pages/News";
+import Mars from "./pages/Mars";
 
 const routes = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const routes = createBrowserRouter([
       {
         path: "noticias",
         element: <News />,
+      },
+      {
+        path: "marte",
+        element: <Mars />,
       },
       {
         path: "*",
