@@ -21,9 +21,12 @@ function NavBar() {
           <Link to={"/foto-do-dia"}>
             <span>FOTO DO DIA</span>
           </Link>
-          <span>PAGE</span>
-          <span>PAGE</span>
-          <span>PAGE</span>
+          <Link to={"/noticias"}>
+            <span>NOTÍCIAS</span>
+          </Link>
+          <Link to={"/marte"}>
+            <span>MARTE</span>
+          </Link>
         </nav>
 
         <nav className="menu-mobile"></nav>

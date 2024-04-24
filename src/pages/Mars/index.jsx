@@ -4,6 +4,7 @@ import axios from "axios";
 const Mars = () => {
   const apiNasa = import.meta.env.VITE_API_NASA;
   const [roverPhotos, setRoverPhotos] = useState([]);
+  const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
     const fetchRoverPhotos = async () => {
@@ -36,11 +37,45 @@ const Mars = () => {
       }
     };
 
+    const fetchWeatherData = async () => {
+      try {
+        const response = await fetch(
+          "https://mars.nasa.gov/rss/api/?feed=weather&category=insight_temperature&feedtype=json&ver=1.0"
+        );
+        const data = await response.json();
+        if (data && data.sol_keys && data.sol_keys.length > 0) {
+          const latestSol = data.sol_keys[data.sol_keys.length - 1];
+          const latestData = data[latestSol];
+          setWeatherData(latestData);
+        } else {
+          throw new Error("No weather data available");
+        }
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
+    };
+
     fetchRoverPhotos();
+    fetchWeatherData();
   }, []);
 
   return (
     <main className="mars-container">
+      <h1>Mars Weather Report</h1>
+      {weatherData ? (
+        <div className="weather-info">
+          <p>Sol: {weatherData.First_UTC}</p>
+          <p>Season: {weatherData.Season}</p>
+          <p>
+            Minimum Temperature: {weatherData.AT ? weatherData.AT.mn : "N/A"} °C
+          </p>
+          <p>
+            Maximum Temperature: {weatherData.AT ? weatherData.AT.mx : "N/A"} °C
+          </p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
       <h1>Mars Page</h1>
       <h2>Mars Rover Photos</h2>
       <div>

@@ -66,6 +66,7 @@ footer {
         width: 0%;
         list-style: none;
         cursor: pointer;
+        text-wrap: nowrap;
 
         &:hover {
           text-decoration: underline;

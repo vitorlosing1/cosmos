@@ -21,19 +21,17 @@ function Footer() {
               HOME
             </Link>
           </li>
-          <li>PAGE</li>
+          <li>
+            <Link to={"/foto-do-dia"}>FOTO DO DIA</Link>
+          </li>
         </ul>
         <ul>
-          <li>PAGE</li>
-          <li>PAGE</li>
-        </ul>
-        <ul>
-          <li>PAGE</li>
-          <li>PAGE</li>
-        </ul>
-        <ul>
-          <li>PAGE</li>
-          <li>PAGE</li>
+          <li>
+            <Link to={"/noticias"}>NOTÍCIAS</Link>
+          </li>
+          <li>
+            <Link to={"/marte"}>MARTE</Link>
+          </li>
         </ul>
       </div>
       <hr />
