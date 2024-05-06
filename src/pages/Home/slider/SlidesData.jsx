@@ -1,9 +1,7 @@
 import slide1 from "../../../assets/images/slides/image1.jpg";
 import slide2 from "../../../assets/images/slides/image2.jpg";
-import slide3 from "../../../assets/images/slides/image3.jpg";
-import slide4 from "../../../assets/images/slides/image4.jpg";
 
-export const images = [slide1, slide2, slide3, slide4];
+export const images = [slide1, slide2];
 
 export const slidesContent = [
   {
@@ -14,21 +12,10 @@ export const slidesContent = [
     link: "/foto-do-dia",
   },
   {
-    title: "SLIDE 2",
-    text: "This is the content for slide 2.",
+    title: "MARTE",
+    text: "As fotos do Mars Rover oferecem uma visão detalhada da superfície de Marte, revelando paisagens panorâmicas, características geológicas e detalhes microscópicos. Essas imagens são cruciais para entender a composição e história do planeta, auxiliando na navegação dos rovers e despertando o interesse público pela exploração espacial e busca por vida extraterrestre",
     button: "SAIBA MAIS",
-    link: "/",
-  },
-  {
-    title: "SLIDE 3",
-    text: "This is the content for slide 3.",
-    button: "SAIBA MAIS",
-    link: "/",
-  },
-  {
-    title: "SLIDE 4",
-    text: "This is the content for slide 4.",
-    button: "SAIBA MAIS",
-    link: "/",
+    subtext: "*imagem meramente ilustrativa",
+    link: "/marte",
   },
 ];
