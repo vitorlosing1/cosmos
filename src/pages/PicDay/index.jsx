@@ -3,7 +3,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles.scss";
 import ptbr from "date-fns/locale/pt-BR";
-import { CustomDatePickerInput } from "./CustomDatePickerInput";
+import { CustomDatePickerInput } from "../../components/CustomDatePickerInput";
 import { picDayNasaApi } from "../../api/picDayNasaApi";
 import { DarkIcon } from "../../assets/svg/DarkIcon";
 
