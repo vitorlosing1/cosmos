@@ -75,3 +75,9 @@ footer {
     }
   }
 }
+
+@media (max-width: 900px) {
+  footer {
+    padding: 24px 40px;
+  }
+}

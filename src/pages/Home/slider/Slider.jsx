@@ -41,7 +41,7 @@ const Slider = () => {
           >
             <div className="slide-content">
               <h1 className="slider-title">{slidesContent[index].title}</h1>
-              <p>{slidesContent[index].text}</p>
+              <p className="slider-text">{slidesContent[index].text}</p>
               <Link to={slidesContent[index].link}>
                 <button className="slider-button">
                   {slidesContent[index].button}

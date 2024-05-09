@@ -145,9 +145,24 @@
     flex-wrap: wrap;
 
     .photo {
+      object-fit: cover;
       .image {
+        object-fit: cover;
         width: 400px;
         height: 300px;
+      }
+    }
+  }
+}
+
+@media (max-width: 980px) {
+  .mars-container {
+    .photos-container {
+      .photo {
+        width: 100%;
+        .image {
+          width: 100%;
+        }
       }
     }
   }

@@ -11,13 +11,14 @@ header {
   -ms-user-select: none;
   user-select: none;
   align-items: center;
+  justify-content: space-between;
 
   a {
     text-decoration: none;
     color: white;
   }
 
-  .left-bar {
+  .logo-container {
     width: 50%;
     display: flex;
 
@@ -39,13 +40,16 @@ header {
     }
   }
 
-  .mid-bar {
+  .nav-bar {
+    display: block;
+    width: 100%;
+
     .menu-desktop {
       display: flex;
-      align-items: center;
       font-weight: 600;
-      gap: 80px;
+      gap: calc(33% - 80px);
       span {
+        display: flex;
         text-wrap: nowrap;
         cursor: pointer;
         transition: 0.5s;
@@ -57,84 +61,14 @@ header {
       }
     }
   }
-
-  .right-bar {
-    display: flex;
-    align-items: center;
-    width: 50%;
-    justify-content: end;
-
-    .search {
-      border-radius: 28px;
-      background-color: $color-grey-light;
-      display: flex;
-      input {
-        font-size: 16px;
-        background-color: transparent;
-        padding: 12px 20px;
-        color: white;
-        border: none;
-        outline: none;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        width: 140px;
-        transition: width 0.4s ease-in-out;
-
-        &::placeholder {
-          color: $color-thirdly;
-        }
-
-        &:focus {
-          width: 200px;
-        }
-      }
-
-      button {
-        background-color: transparent;
-        padding: 12px;
-        border-top-right-radius: 24px;
-        border-bottom-right-radius: 24px;
-        border: none;
-        cursor: pointer;
-        transition: 0.5s;
-
-        &:hover {
-          transition: 0.5s;
-          background-color: $color-secondary;
-        }
-      }
-    }
-  }
 }
 
 @media (max-width: 1300px) {
   header {
-    .left-bar {
+    .logo-container {
       .logo {
         font-size: 20px;
         gap: 4px;
-      }
-    }
-
-    .mid-bar {
-      .menu-desktop {
-        gap: 40px;
-      }
-    }
-    .right-bar {
-      .search {
-        input {
-          width: 112px;
-          font-size: 12px;
-
-          &:focus {
-            width: 140px;
-          }
-        }
-
-        button {
-          padding: 8px;
-        }
       }
     }
   }
@@ -142,7 +76,8 @@ header {
 
 @media (max-width: 900px) {
   header {
-    .left-bar {
+    padding: 24px 40px;
+    .logo-container {
       .logo {
         font-size: 20px;
         gap: 4px;
@@ -153,26 +88,9 @@ header {
       }
     }
 
-    .mid-bar {
+    .nav-bar {
       .menu-desktop {
         display: none;
-      }
-    }
-    .right-bar {
-      .search {
-        background-color: transparent;
-        input {
-          background-color: transparent;
-          display: none;
-        }
-
-        button {
-          background-color: transparent;
-
-          &:hover {
-            background-color: transparent;
-          }
-        }
       }
     }
   }

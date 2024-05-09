@@ -107,3 +107,32 @@
     }
   }
 }
+
+@media (max-width: 1180px) {
+  .home {
+    .content-container {
+      .latest-news-content {
+        .latest-news {
+          .items {
+            width: calc(50% - 20px);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .home {
+    .content-container {
+      .latest-news-content {
+        padding: 20px 40px;
+        .latest-news {
+          .items {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

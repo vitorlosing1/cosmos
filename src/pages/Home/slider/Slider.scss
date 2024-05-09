@@ -148,9 +148,28 @@
     .slider {
       .slide {
         .slide-content {
+          padding: 0px 40px;
           text-align: center;
           align-items: center;
           width: 100%;
+
+          .slider-title {
+            font-size: 28px;
+          }
+
+          .slider-text {
+            font-size: 12px;
+          }
+
+          .slider-subtext {
+            font-size: 8px;
+            color: $color-thirdly;
+          }
+          a {
+            .slider-button {
+              font-size: 12px;
+            }
+          }
         }
       }
     }
