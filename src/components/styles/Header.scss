@@ -60,6 +60,12 @@ header {
         }
       }
     }
+    .menu-mobile {
+      display: none;
+    }
+    .mobile-container {
+      display: none;
+    }
   }
 }
 
@@ -89,8 +95,52 @@ header {
     }
 
     .nav-bar {
+      display: flex;
+      justify-content: end;
+
       .menu-desktop {
         display: none;
+      }
+
+      .menu-mobile {
+        display: initial;
+        background-color: transparent;
+        border-style: none;
+        cursor: pointer;
+        fill: white;
+        transition: 0.5s;
+
+        &:hover {
+          fill: $color-grey-light;
+          transition: 0.5s;
+        }
+      }
+      .mobile-container {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        background-color: $color-grey-light;
+        border-radius: 9px;
+        z-index: 2;
+        right: 20px;
+        top: 60px;
+
+        a {
+          padding-right: 16px;
+          padding-left: 16px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          color: white;
+          text-decoration: none;
+          transition: color 0.5s;
+          border-radius: 8px;
+          transition: 0.5s;
+
+          &:hover {
+            transition: 0.5s;
+            background-color: $color-secondary;
+          }
+        }
       }
     }
   }
