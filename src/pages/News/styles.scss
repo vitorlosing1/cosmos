@@ -52,7 +52,7 @@
           width: 600px;
         }
 
-        .read-article {
+        .read-article-btn {
           position: absolute;
           bottom: 0;
           border: none;
@@ -70,6 +70,18 @@
           }
         }
       }
+    }
+  }
+  .load-more-btn {
+    border: none;
+    background-color: $color-primary;
+    color: white;
+    padding: 8px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: $color-secondary;
     }
   }
 }
