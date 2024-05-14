@@ -5,14 +5,56 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ptbr from "date-fns/locale/pt-BR";
 import { CustomDatePickerInput } from "../../components/CustomDatePickerInput";
+import { DarkIcon } from "../../assets/svg/DarkIcon";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set, get, child } from "firebase/database";
+import { format } from "date-fns";
+import { decode } from "html-entities";
 
 registerLocale("ptbr", ptbr);
 
+const apiNasa = import.meta.env.VITE_API_NASA;
+const apiFirebase = import.meta.env.VITE_API_FIREBASE;
+
+const firebaseConfig = {
+  apiKey: `${apiFirebase}`,
+  authDomain: "cosmos-16b3c.firebaseapp.com",
+  databaseURL: "https://cosmos-16b3c-default-rtdb.firebaseio.com",
+  projectId: "cosmos-16b3c",
+  storageBucket: "cosmos-16b3c.appspot.com",
+  messagingSenderId: "749524648802",
+  appId: "1:749524648802:web:2f6671aebc7ed5c2a0223b",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+
+const savePhotosToFirebase = async (date, photos) => {
+  try {
+    const db = getDatabase(firebaseApp);
+    const photosRef = ref(db, `photos/${date}`);
+    await set(photosRef, photos);
+  } catch (error) {
+    console.error("Erro ao salvar fotos no Firebase:", error);
+  }
+};
+
+const fetchPhotosFromFirebase = async (date) => {
+  try {
+    const db = getDatabase(firebaseApp);
+    const photosRef = ref(db, `photos/${date}`);
+    const snapshot = await get(photosRef);
+    return snapshot.exists() ? snapshot.val() : [];
+  } catch (error) {
+    console.error("Erro ao buscar fotos do Firebase:", error);
+    return [];
+  }
+};
+
 const Mars = () => {
-  const apiNasa = import.meta.env.VITE_API_NASA;
   const [roverPhotos, setRoverPhotos] = useState([]);
   const [availableDates, setAvailableDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date("2023-11-31"));
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -35,23 +77,37 @@ const Mars = () => {
   }, []);
 
   useEffect(() => {
-    const fetchRoverPhotos = async () => {
+    const fetchPhotos = async () => {
+      setLoading(true);
       try {
         const formattedDate = selectedDate.toISOString().split("T")[0];
-        const response = await axios.get(
-          `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${formattedDate}&api_key=${apiNasa}`
-        );
+        const photosFromFirebase = await fetchPhotosFromFirebase(formattedDate);
 
-        const photos = response.data.photos;
-        setRoverPhotos(photos);
-        setError(""); // Reset error message on successful fetch
+        // Se houver fotos no Firebase para a data selecionada, use-as
+        if (photosFromFirebase.length > 0) {
+          setRoverPhotos(photosFromFirebase);
+          setError("");
+        } else {
+          const response = await axios.get(
+            `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${formattedDate}&api_key=${apiNasa}`
+          );
+
+          const photos = response.data.photos;
+          setRoverPhotos(photos);
+          setError(""); // Reset error message on successful fetch
+
+          // Salvar as fotos no Firebase para uso futuro
+          savePhotosToFirebase(formattedDate, photos);
+        }
       } catch (error) {
         console.error("Error fetching Mars Rover photos:", error);
         setError("Não há fotos disponíveis para a data selecionada.");
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchRoverPhotos();
+    fetchPhotos();
   }, [selectedDate]);
 
   const handleDateChange = (date) => {
@@ -65,7 +121,6 @@ const Mars = () => {
   return (
     <main className="mars-container">
       <h1>Fotos do Rover de Marte</h1>
-      {error && <p className="error">{error}</p>}
       <div className="date-selector">
         <p>Selecione a data:</p>
         <DatePicker
@@ -76,24 +131,32 @@ const Mars = () => {
           calendarClassName="calendar"
           customInput={<CustomDatePickerInput />}
           locale={ptbr}
-          maxDate={new Date()}
-          minDate={new Date("2012-08-06")} // Data do primeiro dia em que o rover Curiosity pousou em Marte
+          maxDate={new Date("2023-11-31")}
+          minDate={new Date("2012-08-06")}
           excludeDates={dateOptions.filter(
             (date) => date.getTime() !== selectedDate.getTime()
           )}
         />
       </div>
-      {!error && roverPhotos.length === 0 && (
+      {loading && (
+        <div className="loading">
+          <DarkIcon />
+        </div>
+      )}
+      {error && <p className="error">{error}</p>}
+      {!loading && !error && roverPhotos.length === 0 && (
         <p>Não há fotos disponíveis para a data selecionada.</p>
       )}
-      <div className="photos-container">
-        {roverPhotos.map((photo) => (
-          <div className="photo" key={photo.id}>
-            <p className="camera">{`${photo.camera.full_name} (${photo.camera.name})`}</p>
-            <img className="image" src={photo.img_src} alt="Mars Rover" />
-          </div>
-        ))}
-      </div>
+      {!loading && roverPhotos.length > 0 && (
+        <div className="photos-container">
+          {roverPhotos.map((photo) => (
+            <div className="photo" key={photo.id}>
+              <p className="camera">{`${photo.camera.full_name} (${photo.camera.name})`}</p>
+              <img className="image" src={photo.img_src} alt="Mars Rover" />
+            </div>
+          ))}
+        </div>
+      )}
     </main>
   );
 };

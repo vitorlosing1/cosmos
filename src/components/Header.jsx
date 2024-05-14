@@ -40,7 +40,7 @@ function NavBar() {
           {isModalOpen && (
             <nav className="mobile-container">
               <Link to={"/"} onClick={ReloadPage}>
-                <span>HOME</span>
+                <span>INÍCIO</span>
               </Link>
               <Link to={"/foto-do-dia"}>
                 <span>FOTO DO DIA</span>

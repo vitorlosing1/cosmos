@@ -18,7 +18,7 @@ function Footer() {
         <ul>
           <li>
             <Link onClick={ReloadPage} to={"/"}>
-              HOME
+              INÍCIO
             </Link>
           </li>
           <li>

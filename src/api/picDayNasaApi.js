@@ -1,13 +1,39 @@
 import axios from "axios";
 import { useState } from "react";
 import { translateApi } from "./translateApi";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set } from "firebase/database";
+
+const apiNasa = import.meta.env.VITE_API_NASA;
+const apiFirebase = import.meta.env.VITE_API_FIREBASE;
+
+const firebaseConfig = {
+  apiKey: `${apiFirebase}`,
+  authDomain: "cosmos-16b3c.firebaseapp.com",
+  databaseURL: "https://cosmos-16b3c-default-rtdb.firebaseio.com",
+  projectId: "cosmos-16b3c",
+  storageBucket: "cosmos-16b3c.appspot.com",
+  messagingSenderId: "749524648802",
+  appId: "1:749524648802:web:2f6671aebc7ed5c2a0223b",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
 
 export const picDayNasaApi = () => {
-  const apiNasa = import.meta.env.VITE_API_NASA;
   const { translateText } = translateApi();
   const [picDay, setPicDay] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [previousPics, setPreviousPics] = useState([]);
+
+  const savePicToFirebase = async (date, picData) => {
+    try {
+      const db = getDatabase(firebaseApp);
+      const picRef = ref(db, `pics/${date}`);
+      await set(picRef, picData);
+    } catch (error) {
+      console.error("Erro ao salvar imagem no Firebase:", error);
+    }
+  };
 
   const searchPicDay = async (date) => {
     try {
@@ -27,8 +53,8 @@ export const picDayNasaApi = () => {
         if (response.data.media_type === "image") {
           const translatedDescription = await translateText(
             response.data.explanation
-          ); // Tradução da descrição
-          const translatedTitle = await translateText(response.data.title); // Tradução do título
+          );
+          const translatedTitle = await translateText(response.data.title);
           const translatedPic = {
             ...response.data,
             title: translatedTitle,
@@ -40,6 +66,9 @@ export const picDayNasaApi = () => {
             "cachedPicDay",
             JSON.stringify({ date: formattedDate, data: translatedPic })
           );
+
+          // Salvar a foto no Firebase
+          savePicToFirebase(formattedDate, translatedPic);
         } else {
           setSelectedDate(null);
         }
@@ -65,7 +94,12 @@ export const picDayNasaApi = () => {
         previousDate.setDate(today.getDate() - i);
         previousDates.push(previousDate);
 
-        const formattedDate = previousDate.toISOString().split("T")[0];
+        i++;
+        additionalDays--;
+      }
+
+      const previousPicsPromises = previousDates.map(async (date) => {
+        const formattedDate = date.toISOString().split("T")[0];
         const cachedPreviousPic = JSON.parse(
           localStorage.getItem(`cachedPreviousPic_${formattedDate}`)
         );
@@ -85,31 +119,27 @@ export const picDayNasaApi = () => {
                 `cachedPreviousPic_${formattedDate}`,
                 JSON.stringify(picData)
               );
-            } else {
-              previousDates.pop(); // Remove a última data se a imagem não for do tipo "image"
-              additionalDays++; // Não conta este dia se a imagem não for do tipo "image"
+
+              // Salvar a foto no Firebase
+              savePicToFirebase(formattedDate, picData);
+
+              return picData;
             }
           } catch (error) {
             if (error.response && error.response.status === 404) {
-              // Se o erro for 404, aumente additionalDays
-              additionalDays++;
+              // Se o erro for 404, não faz nada
             }
           }
+        } else {
+          return cachedPreviousPic;
         }
-        i++;
-        additionalDays--; // Reduz additionalDays para sair do loop quando necessário
-      }
 
-      const previousPicsPromises = previousDates.map(async (date) => {
-        const formattedDate = date.toISOString().split("T")[0];
-        return JSON.parse(
-          localStorage.getItem(`cachedPreviousPic_${formattedDate}`)
-        );
+        return null;
       });
 
       const previousPicsData = await Promise.all(previousPicsPromises);
       const filteredPreviousPics = previousPicsData.filter(
-        (data) => data !== null && data.media_type !== "video" && !data.error
+        (data) => data !== null
       );
       setPreviousPics(filteredPreviousPics);
     } catch (error) {
