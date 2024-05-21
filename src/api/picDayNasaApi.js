@@ -85,21 +85,14 @@ export const picDayNasaApi = () => {
   const searchLatestPics = async () => {
     try {
       const today = new Date();
-      const previousDates = [];
+      const previousPicsData = [];
       let additionalDays = 20; // Número de dias adicionais se o dia atual retornar erro 404
 
       let i = 0;
-      while (additionalDays > 0) {
+      while (previousPicsData.length < 20) {
         const previousDate = new Date(today);
         previousDate.setDate(today.getDate() - i);
-        previousDates.push(previousDate);
-
-        i++;
-        additionalDays--;
-      }
-
-      const previousPicsPromises = previousDates.map(async (date) => {
-        const formattedDate = date.toISOString().split("T")[0];
+        const formattedDate = previousDate.toISOString().split("T")[0];
         const cachedPreviousPic = JSON.parse(
           localStorage.getItem(`cachedPreviousPic_${formattedDate}`)
         );
@@ -123,25 +116,23 @@ export const picDayNasaApi = () => {
               // Salvar a foto no Firebase
               savePicToFirebase(formattedDate, picData);
 
-              return picData;
+              previousPicsData.push(picData);
             }
           } catch (error) {
             if (error.response && error.response.status === 404) {
               // Se o erro for 404, não faz nada
+            } else {
+              console.log("Erro ao buscar dados: " + error);
             }
           }
         } else {
-          return cachedPreviousPic;
+          previousPicsData.push(cachedPreviousPic);
         }
 
-        return null;
-      });
+        i++;
+      }
 
-      const previousPicsData = await Promise.all(previousPicsPromises);
-      const filteredPreviousPics = previousPicsData.filter(
-        (data) => data !== null
-      );
-      setPreviousPics(filteredPreviousPics);
+      setPreviousPics(previousPicsData);
     } catch (error) {
       console.log("Não foi possível carregar os dados: " + error);
     }
