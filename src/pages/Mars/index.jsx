@@ -135,7 +135,7 @@ const Mars = () => {
           calendarClassName="calendar"
           customInput={<CustomDatePickerInput />}
           locale={ptbr}
-          maxDate={new Date("2023-11-31")}
+          maxDate={new Date("2023-12-01")}
           minDate={new Date("2012-08-06")}
           excludeDates={dateOptions.filter(
             (date) => date.getTime() !== selectedDate.getTime()
