@@ -7,9 +7,7 @@ import ptbr from "date-fns/locale/pt-BR";
 import { CustomDatePickerInput } from "../../components/CustomDatePickerInput";
 import { DarkIcon } from "../../assets/svg/DarkIcon";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, get, child } from "firebase/database";
-import { format } from "date-fns";
-import { decode } from "html-entities";
+import { getDatabase, ref, set, get } from "firebase/database";
 
 registerLocale("ptbr", ptbr);
 
@@ -80,10 +78,12 @@ const Mars = () => {
     const fetchPhotos = async () => {
       setLoading(true);
       try {
+        if (isNaN(selectedDate.getTime())) {
+          throw new Error("Data inválida selecionada");
+        }
         const formattedDate = selectedDate.toISOString().split("T")[0];
         const photosFromFirebase = await fetchPhotosFromFirebase(formattedDate);
 
-        // Se houver fotos no Firebase para a data selecionada, use-as
         if (photosFromFirebase.length > 0) {
           setRoverPhotos(photosFromFirebase);
           setError("");
@@ -94,9 +94,8 @@ const Mars = () => {
 
           const photos = response.data.photos;
           setRoverPhotos(photos);
-          setError(""); // Reset error message on successful fetch
+          setError("");
 
-          // Salvar as fotos no Firebase para uso futuro
           savePhotosToFirebase(formattedDate, photos);
         }
       } catch (error) {
@@ -111,6 +110,11 @@ const Mars = () => {
   }, [selectedDate]);
 
   const handleDateChange = (date) => {
+    if (isNaN(date.getTime())) {
+      console.error("Data inválida selecionada:", date);
+      setError("Data inválida selecionada.");
+      return;
+    }
     setSelectedDate(date);
   };
 
