@@ -51,7 +51,7 @@ const fetchPhotosFromFirebase = async (date) => {
 const Mars = () => {
   const [roverPhotos, setRoverPhotos] = useState([]);
   const [availableDates, setAvailableDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date("2023-11-31"));
+  const [selectedDate, setSelectedDate] = useState(new Date("2023-12-01"));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
